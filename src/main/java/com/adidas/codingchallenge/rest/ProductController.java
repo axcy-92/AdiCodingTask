@@ -6,7 +6,6 @@ import com.adidas.codingchallenge.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,8 +23,8 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    // TODO: create DTO and converter for Category
     @GetMapping
-    @PreAuthorize("isAnonymous() or isFullyAuthenticated()")
     public ResponseEntity<Collection<Product>> getProducts() {
         Collection<Product> products = productService.getAll();
 
@@ -35,7 +34,6 @@ public class ProductController {
     }
 
     @GetMapping(value = {"byCategory/{id}"})
-    @PreAuthorize("isAnonymous() or isFullyAuthenticated()")
     public ResponseEntity<Collection<Product>> getProductsByCategory(@PathVariable("id") long id) {
         Collection<Product> products = productService.getByCategoryId(id);
 
@@ -45,7 +43,6 @@ public class ProductController {
     }
 
     @GetMapping(value = "{id}")
-    @PreAuthorize("isAnonymous() or isFullyAuthenticated()")
     public ResponseEntity<Product> getProduct(@PathVariable("id") long id) {
         return productService.getById(id)
                 .map(product -> new ResponseEntity<>(product, HttpStatus.OK))
@@ -54,7 +51,7 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<Product> saveProduct(@RequestBody Product product) {
-        Product newProduct = productService.save(product);
+        Product newProduct = productService.saveWithPriceInEur(product);
         return new ResponseEntity<>(newProduct, HttpStatus.OK);
     }
 

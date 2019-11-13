@@ -9,6 +9,6 @@ public interface ProductService {
     Collection<Product> getAll();
     Collection<Product> getByCategoryId(Long categoryId);
     Optional<Product> getById(Long productId);
-    Product save(Product product);
+    Product saveWithPriceInEur(Product product);
     void delete(Long id);
 }

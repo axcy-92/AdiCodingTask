@@ -12,16 +12,21 @@ import feign.Logger;
 import feign.Logger.Level;
 import feign.gson.GsonDecoder;
 import feign.gson.GsonEncoder;
+import lombok.AccessLevel;
+import lombok.Setter;
 
 @Service
 public class CurrencyServiceImpl implements CurrencyService {
 
     @Value("${fixer.api.key}")
+    @Setter(AccessLevel.PACKAGE)
     private String fixerApiKey;
 
     @Value("${fixer.baseCurrency}")
+    @Setter(AccessLevel.PACKAGE)
     private String baseCurrency;
 
+    @Setter(AccessLevel.PACKAGE)
     private FixerClient fixerClient;
 
     public CurrencyServiceImpl(@Value("${fixer.api.url}") String fixerApiUrl) {

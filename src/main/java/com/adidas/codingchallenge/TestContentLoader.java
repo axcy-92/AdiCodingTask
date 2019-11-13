@@ -37,6 +37,8 @@ public class TestContentLoader implements ApplicationListener<ContextRefreshedEv
         product.setName("Test Product");
         product.setDescription("Test Description");
         product.setCategory(subCategory);
+        product.setCurrency("EUR");
+        product.setPrice(100D);
         productRepository.save(product);
     }
 }

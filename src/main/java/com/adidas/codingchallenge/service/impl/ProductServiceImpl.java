@@ -2,7 +2,6 @@ package com.adidas.codingchallenge.service.impl;
 
 import com.adidas.codingchallenge.model.Product;
 import com.adidas.codingchallenge.repository.ProductRepository;
-import com.adidas.codingchallenge.service.CategoryService;
 import com.adidas.codingchallenge.service.CurrencyService;
 import com.adidas.codingchallenge.service.ProductService;
 
@@ -17,9 +16,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductRepository productRepository;
-
-    @Autowired
-    private CategoryService categoryService;
 
     @Autowired
     private CurrencyService currencyService;
@@ -40,7 +36,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product save(Product product) {
+    public Product saveWithPriceInEur(Product product) {
         if (!currencyService.getDefaultCurrency().equalsIgnoreCase(product.getCurrency())) {
             Double priceInDefaultCurrency = currencyService.convertTo(
                     product.getCurrency(),
