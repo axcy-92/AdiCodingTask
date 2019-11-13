@@ -26,4 +26,4 @@ fixer:
   baseCurrency: EUR
   api:
     url: http://data.fixer.io/api
-    key: d9017deef13c58b780f90c790002c0d
+    key: cd9017deef13c58b780f90c790002c0d
